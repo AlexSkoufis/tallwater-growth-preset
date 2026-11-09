@@ -1,0 +1,364 @@
+@import '@fontsource-variable/source-serif-4/opsz.css';
+@import '@fontsource-variable/source-serif-4/opsz-italic.css';
+@import '@fontsource-variable/figtree/wght.css';
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens
+   Deep lake teal #17495e, sky #80d3f4, warm cream, slate #5d6c7b;
+   Source Serif 4 + Figtree. Change the palette here.
+------------------------------------------------------------------- */
+@theme {
+  --color-ink: #0c1f28;
+  --color-ink-2: #11303c;
+  --color-teal: #17495e;
+  --color-sky: #80d3f4;
+  --color-sky-soft: #edfcff;
+  --color-ivory: #f4f0ea;
+  --color-paper: #faf8f4;
+  --color-stone: #e7e0d5;
+  --color-sand: #d6cab8;
+  --color-slate: #5d6c7b;
+  --color-mist: #a3b1bb;
+
+  --font-serif: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+  --font-sans: 'Figtree Variable', 'Figtree', ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --breakpoint-xs: 26rem;
+  --breakpoint-3xl: 112rem;
+}
+
+:root {
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --header-h: 5rem;
+  --line-on-dark: rgb(244 240 234 / 0.14);
+  --line-on-light: rgb(12 31 40 / 0.13);
+  --focus: #80d3f4;
+  color-scheme: light;
+}
+
+/* ------------------------------------------------------------------
+   Base
+------------------------------------------------------------------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-sky);
+    color: var(--color-ink);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-light :focus-visible {
+    --focus: #17495e;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: inherit;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Lenis recommended styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* ------------------------------------------------------------------
+   Layout primitives
+------------------------------------------------------------------- */
+@utility container-x {
+  width: 100%;
+  max-width: 110rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(0.75rem, 1.6vw, 1.75rem);
+}
+
+@utility section-y {
+  padding-block: clamp(5rem, 12vw, 11rem);
+}
+
+@utility hairline {
+  border-color: var(--line-on-light);
+}
+
+@utility hairline-dark {
+  border-color: var(--line-on-dark);
+}
+
+/* ------------------------------------------------------------------
+   Typography system
+------------------------------------------------------------------- */
+@utility font-display {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  letter-spacing: -0.022em;
+  line-height: 0.98;
+}
+
+@utility display-xxl {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: clamp(3.1rem, 10.4vw, 11.5rem);
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+}
+
+@utility display-xl {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 7vw, 7.75rem);
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+}
+
+@utility display-l {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: clamp(2.15rem, 4.8vw, 5.25rem);
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+@utility display-m {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: clamp(1.7rem, 3vw, 3.1rem);
+  letter-spacing: -0.018em;
+  line-height: 1.08;
+}
+
+@utility display-s {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 1.9vw, 1.9rem);
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+}
+
+@utility statement {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: clamp(1.75rem, 4.1vw, 4.4rem);
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+@utility lede {
+  font-family: var(--font-sans);
+  font-size: clamp(1.06rem, 1.3vw, 1.3rem);
+  font-weight: 350;
+  line-height: 1.6;
+  letter-spacing: -0.003em;
+}
+
+@utility body-copy {
+  font-size: 1rem;
+  line-height: 1.72;
+  font-weight: 400;
+}
+
+@utility measure {
+  max-width: 36rem;
+}
+
+@utility measure-wide {
+  max-width: 46rem;
+}
+
+@utility italic-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ------------------------------------------------------------------
+   Interaction primitives
+------------------------------------------------------------------- */
+
+/* Animated underline: draws in from the left, exits to the right. */
+@utility u-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+  transition: background-size 0.6s var(--ease-out-expo);
+  padding-bottom: 0.1em;
+
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+    background-position: 0% 100%;
+  }
+}
+
+@utility u-link-static {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0% 100%;
+  transition: background-size 0.6s var(--ease-out-expo);
+  padding-bottom: 0.1em;
+
+  &:hover,
+  &:focus-visible {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+}
+
+/*
+  Text masks for reveal animations. Display type runs at line-heights below 1,
+  so glyphs overhang the line box; padding (cancelled by negative margin) gives
+  ascenders, descenders and italic overhangs room without shifting layout.
+*/
+.text-mask,
+.split-line-mask {
+  overflow: clip;
+  padding: 0.16em 0.12em 0.2em;
+  margin: -0.16em -0.12em -0.2em;
+}
+
+/* Film grain overlay, kept extremely subtle. */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Architectural guide lines, used sparingly on dark sections. */
+.guides {
+  background-image: linear-gradient(to right, var(--line-on-dark) 1px, transparent 1px);
+  background-size: calc((100% - 2 * var(--gutter)) / 4) 100%;
+  background-position: var(--gutter) 0;
+}
+
+/* Cinematic image grade for official photography on dark sections. */
+.grade-dark {
+  filter: saturate(0.72) contrast(1.04) brightness(0.86);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--color-sky);
+  color: var(--color-ink);
+  font-weight: 600;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Hidden until GSAP takes over, avoids a flash before the intro. */
+.js-intro [data-intro] {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js-intro [data-intro] {
+    visibility: visible;
+  }
+}
+
+@keyframes scrollcue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(220%);
+  }
+}

@@ -1,0 +1,3 @@
+# Demo deployment: keep out of search indexes. Replace when the site goes live.
+User-agent: *
+Disallow: /
